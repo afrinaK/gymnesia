@@ -1,0 +1,15 @@
+.category-card {
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .category-card img {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .category-card:hover {
+    transform: scale(1.05);
+  }
+  
