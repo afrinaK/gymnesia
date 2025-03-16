@@ -5,6 +5,8 @@ import Hero from "./components/Hero.jsx";
 import ShopByCategory from "./components/ShopByCategory";
 import FeaturesSection from "./components/FeaturesSection";
 import HealthGoals from "./components/HealthGoals";
+import Testimonials from "./components/Testimonials.jsx";
+import Footer from "./components/Footer.jsx";
 import "./App.css";
 
 function App() {
@@ -15,6 +17,9 @@ function App() {
       <ShopByCategory />
       <FeaturesSection />
       <HealthGoals />
+      {/* <ImageSection/> */}
+      <Testimonials />
+      <Footer/>
     </div>
   );
 }
