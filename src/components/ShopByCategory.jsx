@@ -1,94 +1,66 @@
-// import React, { useEffect, useState } from "react";
-// import "../styles/ShopByCategory.css"; // Import the CSS file
-
-// const ShopByCategory = () => {
-//   const [images, setImages] = useState([]);
-//   const API_KEY = "kM6pDZDK5HALO3aDZHHrbTZ5Je3rF8Z2P59sKwKMULF4BSMBDoWtFciJ"; // Replace with your API key
-//   const query = "gym equipment"; // Change query if needed
-
-//   useEffect(() => {
-//     fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=6`, {
-//       headers: { Authorization: API_KEY },
-//     })
-//       .then((res) => res.json())
-//       .then((data) => {
-//         setImages(data.photos);
-//       })
-//       .catch((err) => console.error(err));
-//   }, []);
-
-//   return (
-//     <div className="container text-center my-5">
-//       <h2 className="text-white">
-//         Shop By <span className="text-warning">Category</span>
-//       </h2>
-//       {/* Centering the cards */}
-//       <div className="row justify-content-center mt-4">
-//         {images.map((image, index) => (
-//           <div
-//             key={index}
-//             className="col-md-4 col-sm-6 d-flex justify-content-center mb-4"
-//           >
-//             <div className="category-card shadow">
-//               <img
-//                 src={image.src.medium}
-//                 alt="Gym Equipment"
-//                 className="card-img"
-//               />
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ShopByCategory;
-
 import React, { useEffect, useState } from "react";
-import "../styles/ShopByCategory.css"; // Import the CSS file
+import axios from "axios";
+import "../styles/ShopByCategory.css"; // Custom CSS for styling
+
+const API_KEY = "EuPLXdspc0yRiFMW0DdVyFGpJOs3yooWJROLh3AMcTdqFqhn81hR4nfR"; // Replace with your actual API key
+const BASE_URL = "https://api.pexels.com/v1/search?query=";
+
+const categoryNames = [
+  { title: "Weight Loss", size: "small" },
+  { title: "Medicine", size: "tall" },
+  { title: "Brain Health", size: "small" },
+  { title: "Gym", size: "tall" },
+  { title: "Sports Performance", size: "small" },
+  { title: "Beauty and Hair Loss", size: "tall" },
+];
 
 const ShopByCategory = () => {
-  const [images, setImages] = useState([]);
-  const API_KEY = "kM6pDZDK5HALO3aDZHHrbTZ5Je3rF8Z2P59sKwKMULF4BSMBDoWtFciJ"; // Replace with your API key
-  const query = "gym equipment"; // Change query if needed
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch(`https://api.pexels.com/v1/search?query=${query}&per_page=6`, {
-      headers: { Authorization: API_KEY },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setImages(data.photos);
-      })
-      .catch((err) => console.error(err));
+    const fetchImages = async () => {
+      const fetchedCategories = await Promise.all(
+        categoryNames.map(async (category) => {
+          try {
+            const response = await axios.get(`${BASE_URL}${category.title}&per_page=1`, {
+              headers: { Authorization: API_KEY },
+            });
+
+            return {
+              title: category.title,
+              image: response.data.photos[0]?.src.medium || "/default-image.jpg",
+              size: category.size, // Use manually assigned size
+            };
+          } catch (error) {
+            console.error("Error fetching images:", error);
+            return { title: category.title, image: "/default-image.jpg", size: category.size };
+          }
+        })
+      );
+
+      setCategories(fetchedCategories);
+    };
+
+    fetchImages();
   }, []);
 
   return (
-    <div className="container text-center my-5">
-      <h2 className="text-white">
-        Shop By <span className="text-warning">Category</span>
-      </h2>
-      {/* Centering the cards */}
-      <div className="row justify-content-center mt-4">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className="col-md-4 col-sm-6 d-flex justify-content-center mb-4"
-          >
-            <div className="category-card shadow">
-              <img
-                src={image.src.medium}
-                alt="Gym Equipment"
-                className="card-img"
-              />
-              <div className="card-text">
-                <h5 className="mt-3">Category Title</h5>
-                <p>Description or additional text here</p>
+    <div className="container my-5">
+      <div className="category">
+        <h2 className="text-center shop-by-title">
+          <strong>Shop By</strong> <span className="text-warning">Category</span>
+        </h2>
+
+        <div className="category-container">
+          {categories.map((category, index) => (
+            <div key={index} className={`category-card ${category.size}`}>
+              <img src={category.image} className="card-img-top" alt={category.title} />
+              <div className="card-body">
+                <h5 className="card-title">{category.title}</h5>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -1,10 +1,8 @@
 .navbar {
-    background-color: #121b2b; /* Dark blue */
     color: white;
     padding: 15px 40px;
     display: flex;
     justify-content: center;
-    position: fixed;
     width: 100%;
     top: 0;
     left: 0;
@@ -17,13 +15,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap; /* Allows nav-buttons to move to next line */
 }
 
 /* Logo */
-.logo {
-    font-size: 22px;
-    font-weight: bold;
-    color: #e63946;
+.logo img {
+    width: 80px; /* Adjust size as needed */
+    height: auto;
+    display: block;
+    object-fit: contain;
+    margin-left: 60px;
 }
 
 /* Nav Links */
@@ -37,14 +38,83 @@
     text-decoration: none;
     color: white;
     font-weight: 500;
+    position: relative; /* Needed for the underline effect */
+}
+
+.nav-links a:hover {
+    color: white; /* Keep text color unchanged */
+}
+
+.nav-links a::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 2px;
+    background-color: white; /* White underline */
+    position: absolute;
+    left: 50%;
+    bottom: -3px;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+    left: 0;
+}
+.navdiv {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; /* Aligns nav to the left */
+    padding-left: 20px; /* Adds slight spacing from the left */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .navdiv {
+        padding-left: 10px; /* Adjust spacing for smaller screens */
+    }
+}
+.nav-links a::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav-links a:hover::after {
+    transform: scaleX(1);
 }
 
 /* Buttons */
 .nav-buttons {
+    width: 100%;
+    text-align: left;
+    margin-top: 10px; /* Moves it to the next line */
     display: flex;
-    gap: 10px;
+    gap: 25px;
+    justify-content: flex-end; 
 }
 
+/* Social Icons */
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icons a {
+    color: white; /* Change as needed */
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+
+/* Buttons */
 .signup-btn,
 .login-btn {
     background-color: transparent;
@@ -93,5 +163,11 @@
 
     .hamburger {
         display: block; /* Show hamburger menu */
+    }
+
+    /* Center-align buttons on mobile */
+    .nav-buttons {
+        text-align: center;
+        justify-content: center;
     }
 }

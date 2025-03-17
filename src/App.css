@@ -5,5 +5,6 @@ body {
   background-repeat: no-repeat; /* Prevents repeating */
   min-height: 100vh; /* Ensures the background covers the full height */
   width: 100%;
-  overflow-x: hidden; /* Prevents horizontal scrolling */
+/* Prevents horizontal scrolling */
 }
+

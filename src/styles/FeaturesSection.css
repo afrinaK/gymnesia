@@ -1,14 +1,19 @@
 .features-section {
   background-color: rgba(0, 123, 255, 0.1); /* Bluish transparent background */
   width: 100%; /* Ensure it spans the full width */
+  margin-top: 20px;
+  margin-bottom: 100px;
 }
 
 .feature-item {
-  padding: 20px;
+  display: flex;
+  align-items: center; /* Align icon and text vertically */
+  justify-content: center; /* Center content horizontally */
+  gap: 10px; /* Add spacing between icon and text */
+  padding: 15px;
   border-radius: 10px;
   transition: transform 0.3s ease-in-out;
-
-  margin: 10px; /* Add some spacing between items */
+  margin: 10px;
 }
 
 .feature-item:hover {
@@ -23,7 +28,7 @@
 
 .feature-item h5 {
   font-size: 1.25rem;
-  color: #fff; /* White color for text */
+  color: #fff;
   margin: 0;
 }
 
@@ -40,4 +45,8 @@
 .col-sm-6 {
   padding: 0 10px; /* Add padding to columns */
   flex: 1 1 auto; /* Allow columns to grow and shrink */
+}
+.feature-icon {
+  font-size: 1rem;
+  color: #ffd700; /* Golden color */
 }

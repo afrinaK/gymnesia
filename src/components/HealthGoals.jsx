@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import "../styles/HealthGoals.css"; // Import the CSS file
+import "../styles/HealthGoals.css"; // Import the updated CSS file
 
 const HealthGoals = () => {
   const [products, setProducts] = useState([]);
-  const PEXELS_API_KEY =
-    "kM6pDZDK5HALO3aDZHHrbTZ5Je3rF8Z2P59sKwKMULF4BSMBDoWtFciJ"; // Replace with your Pexels API key
-  const MOCK_API_URL = "https://jsonplaceholder.typicode.com/posts"; // Mock API for prices
+  const PEXELS_API_KEY = "kM6pDZDK5HALO3aDZHHrbTZ5Je3rF8Z2P59sKwKMULF4BSMBDoWtFciJ"; 
+  const MOCK_API_URL = "https://jsonplaceholder.typicode.com/posts"; 
 
   useEffect(() => {
     // Fetch images from Pexels API
@@ -34,36 +33,38 @@ const HealthGoals = () => {
   return (
     <div className="health-goals">
       <h1>
-        Solutions For Your <span className="highlight">Unique</span> Health
-        Goals
+        Solutions For Your <span className="highlight">Unique</span> Health Goals
       </h1>
+
       {/* Filter Buttons */}
       <div className="filter-buttons">
-        {[
-          "All",
-          "Best Selling",
-          "Weight Loss",
-          "Beauty",
-          "Testosterone",
-          "Sexual Health",
-        ].map((category) => (
-          <button key={category} className="filter-btn">
-            {category}
-          </button>
+        {["All", "Best Selling", "Weight Loss", "Beauty", "Testosterone", "Sexual Health"].map((category) => (
+          <button key={category} className="filter-btn">{category}</button>
         ))}
       </div>
+
       <div className="categories">
         <div className="other-categories">
           <div className="product-grid">
             {products.slice(4).map((product) => (
               <div key={product.id} className="product-card">
                 <img src={product.image} alt={product.title} />
-                <h4>{product.title}</h4>
-                <p>{product.price}</p>
+                <h4 className="product-title">{product.title}</h4>
+                <div className="product-footer">
+                  <p className="product-price">{product.price}</p>
+                  <button className="cart-button">
+                    🛒
+                  </button>
+                </div>
               </div>
             ))}
           </div>
+
         </div>
+        <div className="arrow-buttons">
+  <button className="arrow-button">←</button>
+  <button className="arrow-button">→</button>
+</div>
       </div>
     </div>
   );

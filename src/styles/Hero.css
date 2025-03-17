@@ -41,21 +41,21 @@
 }
 
 .hero-button:hover {
-    background-color: white;
-    color: black;
+
+    transition: all 0.3s ease-in-out;
 }
 
 /* SEARCH BAR WRAPPER */
-
 .search-container {
     display: flex;
-    justify-content: center; /* Centers horizontally */
+    justify-content: center;
     align-items: center;
     width: 100%;
     position: absolute;
-    bottom: 20%; /* Adjust as needed */
+    bottom: -60px; /* Adjust this value to move it lower */
     left: 50%;
-    transform: translateX(-50%); /* Ensures it stays centered */
+    transform: translateX(-50%);
+    z-index: 10;
 }
 
 
